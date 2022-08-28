@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>66</x>
+      <y>0</y>
+      <w>858</w>
+      <h>612</h>
+    </coordinates>
+    <panel_attributes>ROOT
+--
+TIMER_FLASH[flashOn]/ flashOn = false, display(0)
+TIMER_FLASH[!flashOn]/ flashOn = true, display(ledCount)
+
+valign=top
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

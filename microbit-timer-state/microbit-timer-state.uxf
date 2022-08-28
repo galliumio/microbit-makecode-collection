@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <help_text>// Uncomment the following line to change the fontsize and font:
+fontsize=14
+fontfamily=Monospaced //possible: SansSerif,Serif,Monospaced
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Welcome to UMLet!
+//
+// Double-click on elements to add them to the diagram, or to copy them
+// Edit elements by modifying the text in this panel
+// Hold Cmd to select multiple elements
+// Use Cmd+mouse to select via lasso
+//
+// Use +/- or Cmd+mouse wheel to zoom
+// Drag a whole relation at its central square icon
+//
+// Press Cmd+C to copy the whole diagram to the system clipboard (then just paste it to, eg, Word)
+// Edit the files in the "palettes" directory to create your own element palettes
+//
+// Select "Custom Elements &gt; New..." to create new element types
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// This text will be stored with each diagram;  use it for notes.</help_text>
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>10</x>
+      <y>20</y>
+      <w>1430</w>
+      <h>1020</h>
+    </coordinates>
+    <panel_attributes>ROOT
+--
+TIMER_FLASH[flashOn]/ flashOn = false, display(0)
+TIMER_FLASH[!flashOn]/ flashOn = true, display(ledCount)
+
+valign=top
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>460</x>
+      <y>130</y>
+      <w>490</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>STOPPED
+--
+entry/ flashOn = true,
+       display(ledCount),
+       timer.start(TIMER_FLASH, 500, true)
+exit/ timer.stop(TIMER_FLASH)
+
+valign=top
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>650</x>
+      <y>90</y>
+      <w>20</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>type=initial
+group=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
+      <y>90</y>
+      <w>80</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+group=1</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0;60.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>1140</x>
+      <y>60</y>
+      <w>170</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>mainState
+style=wordwrap
+fontsize=24</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>80</x>
+      <y>470</y>
+      <w>1300</w>
+      <h>530</h>
+    </coordinates>
+    <panel_attributes>STARTED
+--
+A_PRESSED/ ^^TIMER_STOP
+
+valign=top
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>130</x>
+      <y>580</y>
+      <w>490</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>RUNNING
+--
+entry/ timer.start(TIMER_INTERVAL, intervalMs, true)
+exit/ timer.stop(TIMER_INTERVAL)
+TIMER_INTERVAL
+/ display(++ledCount),
+  remainingTime -= intervalMs 
+  if (remainingTime &lt;= 0)
+    ^^TIMEOUT
+
+valign=top
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>880</x>
+      <y>580</y>
+      <w>450</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>PAUSED
+--
+entry/ led.setBrightness(50)
+exit/ led.setBrightness(255)
+valign=top
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>720</x>
+      <y>90</y>
+      <w>350</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>130</x>
+      <y>830</y>
+      <w>490</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>TIMED_OUT
+--
+entry/ timer.start(TIMER_FLASH, 100, true),
+       timer.start(TIMER_STOP, 10000),
+       flashOn = true
+exit/ timer.stop(TIMER_FLASH),
+      timer.stop(TIMER_STOP)       
+valign=top
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>300</y>
+      <w>30</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>490</x>
+      <y>370</y>
+      <w>140</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>TIMER_STOP
+/ ledCount = 0
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>240</x>
+      <y>540</y>
+      <w>80</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+group=2</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0;60.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>230</x>
+      <y>540</y>
+      <w>20</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>type=initial
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>350</x>
+      <y>730</y>
+      <w>30</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>370</x>
+      <y>770</y>
+      <w>90</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>TIMEOUT
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>620</x>
+      <y>300</y>
+      <w>30</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;170.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>610</x>
+      <y>610</y>
+      <w>290</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;270.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>790</x>
+      <y>340</y>
+      <w>340</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>A_PRESSED
+/ remainingTime = ledCount*2*60*1000
+  intervalMs = remainingTime/24
+  ledCount = 1, display(ledCount)
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>690</x>
+      <y>590</y>
+      <w>110</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>B_PRESSED
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>610</x>
+      <y>680</y>
+      <w>290</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>270.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>690</x>
+      <y>660</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>B_PRESSED
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>940</x>
+      <y>170</y>
+      <w>80</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0;60.0;90.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>1000</x>
+      <y>200</y>
+      <w>280</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>B_PRESSED
+/ ledCount = ledCount % 25 + 1
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>730</x>
+      <y>80</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>/ ledCount = 0
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
